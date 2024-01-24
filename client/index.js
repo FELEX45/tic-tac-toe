@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const socket = io('localhost:3001');
     const outputElement = document.getElementById('output');
-    writeToOutput('Socket connected:', socket);
+    const playState = document.getElementById("state");
+    writeToOutput('Подключение стабильно', socket);
+    writeState('Вы играете за ' + "O");
+
 
     let players = [];
     let currentPlayer = '';
@@ -13,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function writeToOutput(message) {
         outputElement.innerHTML += `<p>${message}</p>`;
     }
+
+    function writeState(message) {
+        playState.innerHTML = message;
+    }
+
 
     function createBoard() {
         for (let i = 0; i < 9; i++) {
@@ -35,23 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (myTurn) {
             socket.emit('makeMove', index);
         } else {
-            alert("It's not your turn!");
+            alert("Не ваш ход!");
         }
     }
 
     socket.on('updatePlayers', (updatedPlayers) => {
-        writeToOutput('Received updated players:', updatedPlayers);
         players = updatedPlayers;
     });
 
     socket.on('yourTurn', (turn) => {
-        writeToOutput('Received your turn:', turn);
+        writeState('Вы играете за ' + turn);
         currentPlayer = turn;
         myTurn = (socket.id === players[0] && currentPlayer === 'X') || (socket.id === players[1] && currentPlayer === 'O');
     });
 
     socket.on('updateBoard', (updatedBoard) => {
-        writeToOutput('Received updated board:', updatedBoard);
         updateBoard(updatedBoard);
     });
 
@@ -63,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateBoard(board);
     });
-
 
     createBoard();
 });
