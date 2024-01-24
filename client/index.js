@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM is ready');
 
-    const socket = io('https://tic-tac-toe1-eta.vercel.app:3001');
+    const socket = io('localhost:3001');
     console.log('Socket connected:', socket);
 
     let players = [];
