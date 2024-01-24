@@ -11,9 +11,13 @@ app.use(express.static('client'));
 let players = [];
 let board = Array(9).fill(null);
 let currentPlayer = 'X';
+let nameUser = [];
 
 io.on('connection', (socket) => {
-    console.log('Подключился пользователь ID:', socket.id);
+
+    nameUser.push(socket.id)
+    console.log('Список пользователей в сети:', nameUser[0], nameUser[1])
+
     if (players.length < 2 ) {
         resetGame()
     }
