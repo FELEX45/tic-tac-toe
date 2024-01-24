@@ -6,7 +6,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-app.use(express.static('client'));
 
 let players = [];
 let board = Array(9).fill(null);
