@@ -13,7 +13,7 @@ let board = Array(9).fill(null);
 let currentPlayer = 'X';
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
+    console.log('Подключился пользователь ID:', socket.id);
 
     players.push(socket.id);
     io.emit('updatePlayers', players);
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         players = players.filter(player => player !== socket.id);
         io.emit('updatePlayers', players);
-        console.log('A user disconnected:', socket.id);
+        console.log('Отключился пользователь ID:', socket.id);
     });
 });
 
@@ -76,5 +76,5 @@ function resetGame() {
 
 const port = process.env.PORT || 3001;
 server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Сервер начал работу на PORT: ${port}`);
 });
