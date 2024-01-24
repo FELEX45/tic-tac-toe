@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM is ready');
 
-    const socket = io('http://localhost:3001');
+    const socket = io('localhost:3001');
     console.log('Socket connected:', socket);
 
     let players = [];

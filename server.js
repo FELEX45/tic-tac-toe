@@ -6,14 +6,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-app.use(express.static('client'));
+app.use(express.static('public'));
 
 let players = [];
 let board = Array(9).fill(null);
 let currentPlayer = 'X';
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
+    console.log('Подключился пользователь ID:', socket.id);
 
     players.push(socket.id);
     io.emit('updatePlayers', players);
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         players = players.filter(player => player !== socket.id);
         io.emit('updatePlayers', players);
-        console.log('A user disconnected:', socket.id);
+        console.log('Отключился пользователь ID:', socket.id);
     });
 });
 
@@ -55,14 +55,14 @@ function checkWinner() {
 
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
             const winner = board[a];
-            io.emit('gameOver', { winner, board });
+            io.emit('gameOver', { winner, updatedBoard: board });
             resetGame();
             return;
         }
     }
 
     if (board.every(cell => cell !== null)) {
-        io.emit('gameOver', { winner: 'draw', board });
+        io.emit('gameOver', { winner: 'draw', updatedBoard: board });
         resetGame();
     }
 }
@@ -76,5 +76,5 @@ function resetGame() {
 
 const port = process.env.PORT || 3001;
 server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Сервер начал работу на PORT: ${port}`);
 });
