@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-app.use(express.static('client'));
+app.use(express.static('public'));
 
 let players = [];
 let board = Array(9).fill(null);
@@ -55,14 +55,14 @@ function checkWinner() {
 
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
             const winner = board[a];
-            io.emit('gameOver', { winner, board });
+            io.emit('gameOver', { winner, updatedBoard: board });
             resetGame();
             return;
         }
     }
 
     if (board.every(cell => cell !== null)) {
-        io.emit('gameOver', { winner: 'draw', board });
+        io.emit('gameOver', { winner: 'draw', updatedBoard: board });
         resetGame();
     }
 }
