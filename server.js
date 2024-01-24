@@ -27,21 +27,28 @@ io.on('connection', (socket) => {
 
     io.to(players[0]).emit('yourTurn', currentPlayer);
 
+    let turnH = ' ';
+
     socket.on('makeMove', (index) => {
         if (socket.id === players[0] && currentPlayer === 'X' && board[index] === null) {
+            turnH = "O"
             board[index] = 'X';
             io.emit('updateBoard', board);
             checkWinner();
             currentPlayer = 'O';
             io.to(players[1]).emit('yourTurn', currentPlayer);
         } else if (socket.id === players[1] && currentPlayer === 'O' && board[index] === null) {
+            turnH = "X"
             board[index] = 'O';
             io.emit('updateBoard', board);
             checkWinner();
             currentPlayer = 'X';
             io.to(players[0]).emit('yourTurn', currentPlayer);
         }
+        io.emit('turnH', turnH);
     });
+
+
 
     socket.on('disconnect', () => {
         players = players.filter(player => player !== socket.id);

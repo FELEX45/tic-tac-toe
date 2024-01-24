@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const outputElement = document.getElementById('output');
     const playState = document.getElementById("state");
     writeToOutput('Подключение стабильно', socket);
-    writeState('Вы играете за ' + "O");
+    writeState('Вы играете за O');
 
 
     let players = [];
@@ -43,15 +43,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (myTurn) {
             socket.emit('makeMove', index);
         } else {
-            alert("Не ваш ход!");
+            alert("Не ваш ход!"+ currentPlayer);
         }
     }
+
 
     socket.on('updatePlayers', (updatedPlayers) => {
         players = updatedPlayers;
     });
 
+    socket.on('turnH', (turnH) => {
+        console.log('Получено событие turnH:', turnH);})
+
     socket.on('yourTurn', (turn) => {
+        console.log('Текущий ход: ', turn);
         writeState('Вы играете за ' + turn);
         currentPlayer = turn;
         myTurn = (socket.id === players[0] && currentPlayer === 'X') || (socket.id === players[1] && currentPlayer === 'O');
