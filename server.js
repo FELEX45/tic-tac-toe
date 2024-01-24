@@ -14,6 +14,9 @@ let currentPlayer = 'X';
 
 io.on('connection', (socket) => {
     console.log('Подключился пользователь ID:', socket.id);
+    if (players.length < 2 ) {
+        resetGame()
+    }
 
     players.push(socket.id);
     io.emit('updatePlayers', players);
