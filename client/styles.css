@@ -4,33 +4,122 @@
     gap: 10px;
     max-width: 300px;
     margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+
 }
 
 #state {
-
+    position: absolute;
+    right: 0;
+    top:0;
+    margin-right: 20px;
+    border: 4px solid black;
+    border-image: conic-gradient( red, yellow, lime, aqua, blue, magenta, red) 1 ;
+    padding: 10px;
+    font-weight: 800;
+    font-size: 35px;
+    background: white;
 }
+
 
 #output {
     position: absolute;
     left: 0;
     top: 0;
     color: gray;
-    font-size: 12px;
+    font-size: 15px;
     width: 250px;
     height: 400px;
+    color: green;
+    font-weight: 800;
+}
+#turn {
+    border: 2px solid black;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    background: white;
+    font-size: 28px;
+    font-weight: 600;
+
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 150px;
     cursor: pointer;
+    padding: 10px;
+    background: white;
+}
+p {
+    margin: 0;
+    padding: 0;
 }
 
-body {
-    position: relative;
+.cell:hover {
+    border: 3px solid black;
 }
+
+
+body {
+    background: url('./background.jpg');
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+#source {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.src {
+    text-decoration: none;
+    color: indigo;
+    font-weight: 600;
+    font-size: 23px;
+
+}
+
+#madeBy {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.github {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+@media only screen and (min-width: 960px) {
+    /*До 960px*/
+
+}
+@media only screen and (min-width: 1440px) {
+    /* styles for browsers larger than 1440px; */
+}
+@media only screen and (max-device-width: 480px) {
+    /* styles for mobile browsers smaller than 480px; (iPhone) */
+}
+@media only screen and (device-width: 768px) {
+    /* default iPad screens */
+}
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+    /* For portrait layouts only */
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {}
+/* For landscape layouts only */

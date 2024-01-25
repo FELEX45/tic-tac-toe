@@ -3,8 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const socket = io('localhost:3001');
     const outputElement = document.getElementById('output');
     const playState = document.getElementById("state");
+    const turnElement = document.getElementById("turn");
+
     writeToOutput('Подключение стабильно', socket);
     writeState('Вы играете за O');
+    turnElement.innerHTML = 'Сейчас ходит X'
 
 
     let players = [];
@@ -47,13 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     socket.on('updatePlayers', (updatedPlayers) => {
         players = updatedPlayers;
     });
 
-    socket.on('turnH', (turnH) => {
-        console.log('Получено событие turnH:', turnH);})
+    socket.on('turnH', (turnH) =>{
+        turnElement.innerHTML = `<p>Сейчас ходит ${turnH}</p>`
+    })
 
     socket.on('yourTurn', (turn) => {
         console.log('Текущий ход: ', turn);
@@ -68,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.on('gameOver', ({ winner, board }) => {
         if (winner === 'draw') {
-            alert('It\'s a draw!');
+            alert('Ничья!');
         } else {
-            alert(`Player ${winner} wins!`);
+            alert(`Игрок ${winner} победил!`);
         }
         updateBoard(board);
     });
