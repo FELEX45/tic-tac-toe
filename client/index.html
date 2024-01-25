@@ -1,28 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+  </head>
+  <body>
+    <div id="turn"></div>
+    <div id="board"></div>
+    <div id="output"></div>
+    <div id="state"></div>
+    <div id="source">
+      <img class="github" src="./github.svg" alt="github" />
+      <a class="src" href="https://github.com/FELEX45/tic-tac-toe"> Github </a>
+    </div>
+    <div id="madeBy">Made by FELEX45&Balodya</div>
+    <section class="modal hidden">
+      <div class="flex">
+        <img
+          src="https://avatars.githubusercontent.com/u/62628408?s=96&v=4"
+          width="50px"
+          height="50px"
+          alt="user"
+        />
+        <button class="btn-close">⨉</button>
+      </div>
+    </section>
 
-</head>
-<body>
-<div id="turn"></div>
-<div id="board"></div>
-<div id="output"></div>
-<div id="state"></div>
-<div id="source">
-    <img class="github" src="./github.svg" alt="github">
-    <a class="src" href="https://github.com/FELEX45/tic-tac-toe">
-        Github
-    </a>
-</div>
-<div id="madeBy">Made by FELEX45&Balodya</div>
+    <div class="overlay hidden"></div>
 
-<script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
-<script src="./index.js"></script>
-</body>
+    <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
+    <script src="./index.js"></script>
+  </body>
 </html>
